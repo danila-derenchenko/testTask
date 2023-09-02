@@ -1,8 +1,10 @@
-
+import Header from "../header/header"
 
 const Todo = () => {
     return (
-        <div></div>
+        <div className="todo_wrapper">
+            <Header />
+        </div>
     )
 }
 

@@ -1,0 +1,22 @@
+.header_wrapper {
+    height: 70px;
+    width: 100%;
+    background: #9D9D9D;   
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header_link {
+    text-decoration: none;
+    color: azure;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.header_link:hover {
+    cursor: pointer;
+}

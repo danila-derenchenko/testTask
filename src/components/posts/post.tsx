@@ -1,8 +1,10 @@
-
+import Header from "../header/header"
 
 const Posts = () => {
     return (
-        <div></div>
+        <div className="posts_wrapper">
+            <Header />
+        </div>
     )
 }
 
