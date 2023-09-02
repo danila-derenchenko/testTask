@@ -1,15 +1,22 @@
-import { useState } from "react"
-import { Button, Input, message } from "antd"
 import './login.css'
+import { SetStateAction, useState } from "react"
+import { Button, Input, message } from "antd"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from 'react-redux'
+import { actions } from '../../store/reducers'
 
 const Login = () => {
     sessionStorage.username = 'user'
     sessionStorage.password = '123456'
+    sessionStorage.isLogin = false
 
-    const [ userNameValue, setUserNameValue ] = useState()
-    const [ passwordValue, setPasswordValue ] = useState()
+    const [ userNameValue, setUserNameValue ] = useState('')
+    const [ passwordValue, setPasswordValue ] = useState('')
     const [ statusInput, setStatusInput ] = useState(true)
     const [ messageApi, contextHolder ] = message.useMessage()
+    const dispatch = useDispatch()
+
+    const redirectTo = useNavigate()
 
     const success = () => {
         messageApi.open({
@@ -25,13 +32,11 @@ const Login = () => {
         })
     }
 
-    const onChangeUserName = (evt:any) => {
-        console.log(evt)
+    const onChangeUserName = (evt: { target: { value: SetStateAction<string> } }) => {
         setUserNameValue(evt.target.value)
     }
 
-    const onChangePassword = (evt:any) => {
-        console.log(evt)
+    const onChangePassword = (evt: { target: { value: SetStateAction<string> } }) => {
         setPasswordValue(evt.target.value)
     }
 
@@ -39,6 +44,8 @@ const Login = () => {
         if(userNameValue == sessionStorage.username && passwordValue == sessionStorage.password) {
             success()
             setStatusInput(true)
+            dispatch(actions.login())
+            redirectTo('/posts')
         } else {
             error()
             setStatusInput(false)

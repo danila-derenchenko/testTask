@@ -1,0 +1,21 @@
+.posts {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.postsBox {
+    width: 500px;
+}
+
+.posts_filter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.posts_filter_text {
+    font-weight: 600;
+}
