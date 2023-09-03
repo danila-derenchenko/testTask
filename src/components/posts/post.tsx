@@ -9,13 +9,11 @@ import { Button, List, Switch, message } from 'antd'
 
 const Posts = () => {
     const [ list, setPosts ] = useState([])
-    const [ filterList, setFilterList ] = useState([])
-    const [ isFilter, setIsFilter ] = useState(false)
+    const [ forFilterList, setForFilter ] = useState([])
     const [ countViewItems, setCountViewItems ] = useState(10)
     const [ loading, setLoading ] = useState(true)
     const [ messageApi, contextHolder ] = message.useMessage()
-    // const islogin = useSelector((state: { isLogin:boolean }) => state.isLogin)
-    const islogin = true
+    const islogin = useSelector((state: { isLogin:boolean }) => state.isLogin)
 
     const error = () => {
         messageApi.open({
@@ -28,17 +26,16 @@ const Posts = () => {
         setLoading(true)
         axios.get(consts.urlPosts).then((res) => {
             setPosts(res.data)
-            setFilterList(res.data.filter((item: { userId: number }) => item.userId == 1))
+            setForFilter(res.data)
         }).catch(error)
         setLoading(false)
     }, [])
 
     const filterItem = (сondition:any) => {
-        const copy = list
         if(сondition) {
-            setPosts(prev => prev.filter((item) => item.userId == 1))
+            setPosts(prev => prev.filter(item => item.userId == 1))
         } else {
-            setPosts(copy)
+            setPosts(forFilterList)
         }
     }
 
@@ -66,12 +63,13 @@ const Posts = () => {
                                         <div className='postsBox'>
                                             <List
                                                 itemLayout="horizontal"
+                                                className='postItem'
                                                 dataSource={list.slice(0, countViewItems)}
                                                 renderItem={(item) => (
                                                 <List.Item>
                                                     <List.Item.Meta
                                                     title={<div>
-                                                        <p>{`Автор: пользователь ${item.userId}`}</p>
+                                                        <p>{`${item.id}) Автор: пользователь ${item.userId}`}</p>
                                                         <p>{item.title}</p>
                                                     </div>}
                                                     description={<p>{item.body}</p>}
@@ -82,7 +80,9 @@ const Posts = () => {
                                             />
                                             {
                                                 (list.length > countViewItems) ? (
-                                                    <Button onClick={addPosts}>Подгрузить ещё посты</Button>
+                                                    <div className="posts_button">
+                                                        <Button className='postsButton' onClick={addPosts}>Подгрузить ещё посты</Button>
+                                                    </div>
                                                 ) : (
                                                     <div></div>
                                                 )

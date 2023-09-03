@@ -10,6 +10,11 @@
     width: 500px;
 }
 
+.postItem {
+    width: 500px;
+    margin-bottom: 15px;
+}
+
 .posts_filter {
     display: flex;
     align-items: center;
@@ -18,4 +23,10 @@
 
 .posts_filter_text {
     font-weight: 600;
+}
+
+.posts_button {
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 200px;
 }

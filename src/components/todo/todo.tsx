@@ -9,7 +9,10 @@ const Todo = () => {
         <div className="todo_wrapper">
             {
                 islogin ? (
-                    <Header />
+                    <div>
+                        <Header />
+
+                    </div>
                 ) : (
                     <Navigate to='/login' />
                 )
