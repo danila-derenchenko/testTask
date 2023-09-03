@@ -2,7 +2,7 @@
   "name": "testtask",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://github.com/danila-derenchenko/testTask",
+  "homepage": "https://danila-derenchenko.github.io/testTask",
   "type": "module",
   "scripts": {
     "dev": "vite",
