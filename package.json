@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "tsc && vite build",
-    "deploy": "vite build && gh-pages -d dist"
+    "deploy": "vite gh-pages deploy"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
