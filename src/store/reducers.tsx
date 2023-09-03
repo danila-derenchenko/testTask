@@ -7,9 +7,11 @@ export const isloginSlice = createSlice({
     initialState: initualState,
     reducers: {
         login: (state) => {
+            console.log(state)
             return state = true
         },
         logout: (state) => {
+            console.log(state)
             return state = false
         }
     }

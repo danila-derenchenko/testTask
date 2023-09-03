@@ -20,7 +20,7 @@ const Header = () => {
         <header className="header_wrapper">
             <div className="header container">
                 <p id="/posts" className="header_link" onClick={redirectToFunction}>Posts</p>
-                <p id="/todo" className="header_link" onClick={redirectToFunction}>Todo</p>
+                <p id="/todos" className="header_link" onClick={redirectToFunction}>Todo</p>
                 <p className="header_link" onClick={logoutFunction}>Logout</p>
             </div>
         </header>

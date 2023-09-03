@@ -33,7 +33,7 @@ const Posts = () => {
 
     const filterItem = (сondition:any) => {
         if(сondition) {
-            setPosts(prev => prev.filter(item => item.userId == 1))
+            setPosts(prev => prev.filter((item: { userId:number }) => item.userId == 1))
         } else {
             setPosts(forFilterList)
         }
@@ -65,7 +65,12 @@ const Posts = () => {
                                                 itemLayout="horizontal"
                                                 className='postItem'
                                                 dataSource={list.slice(0, countViewItems)}
-                                                renderItem={(item) => (
+                                                renderItem={(item:{
+                                                    title:string,
+                                                    id:number,
+                                                    userId:number,
+                                                    body:string
+                                                }) => (
                                                 <List.Item>
                                                     <List.Item.Meta
                                                     title={<div>

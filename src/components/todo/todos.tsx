@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import Header from "../header/header"
 import { Navigate } from "react-router-dom"
 
-const Todo = () => {
+const Todos = () => {
     const islogin = useSelector((state: { isLogin:boolean }) => state.isLogin)
 
     return (
@@ -21,4 +21,4 @@ const Todo = () => {
     )
 }
 
-export default Todo
+export default Todos
