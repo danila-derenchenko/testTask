@@ -7,20 +7,12 @@ import Todos from './components/todo/todos';
 const App = () => {
 
   return (
-      <Routes>
-        <Route path='/'>
-          <Navigate to='/login' />
-        </Route>
-        <Route path='/login'>
-          <Login />
-        </Route>
-        <Route path='/posts'>
-          <Posts />
-        </Route>
-        <Route path='/todos'>
-          <Todos />
-        </Route>
-      </Routes>
+    <Routes>
+      <Route path='/' element={<Navigate to='/login' />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/posts' element={<Posts />} />
+      <Route path='/todos' element={<Todos />} />
+    </Routes>
   )
 };
 

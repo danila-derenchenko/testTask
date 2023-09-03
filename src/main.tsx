@@ -9,7 +9,7 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   
     <Provider store={store} >
-      <BrowserRouter basename={"https://danila-derenchenko.github.io/testtask/"}>
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
