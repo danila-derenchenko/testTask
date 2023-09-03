@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/login/login';
 import Posts from './components/posts/posts';
 import Todos from './components/todo/todos';
@@ -7,14 +7,20 @@ import Todos from './components/todo/todos';
 const App = () => {
 
   return (
-    <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Navigate to='/login' />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/posts' element={<Posts />} />
-        <Route path='/todos' element={<Todos />} />
+        <Route path='/'>
+          <Navigate to='/login' />
+        </Route>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/posts'>
+          <Posts />
+        </Route>
+        <Route path='/todos'>
+          <Todos />
+        </Route>
       </Routes>
-    </BrowserRouter>
   )
 };
 
