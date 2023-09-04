@@ -43,7 +43,7 @@ const Todos = () => {
                                             <List
                                                 itemLayout="horizontal"
                                                 className='postItem'
-                                                dataSource={listTodos.filter((item: { userId:number }) => item.userId == 1)}
+                                                dataSource={listTodos.filter((item: { userId:number, completed:boolean }) => (item.userId == 1 && item.completed == false))}
                                                 renderItem={(item:{
                                                     title:string,
                                                     id:number,
