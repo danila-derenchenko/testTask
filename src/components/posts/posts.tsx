@@ -1,7 +1,5 @@
 import './posts.css'
-import { useSelector } from "react-redux"
 import Header from "../header/header"
-import { Navigate } from "react-router-dom"
 import consts from '../../const'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -13,7 +11,6 @@ const Posts = () => {
     const [ countViewItems, setCountViewItems ] = useState(10)
     const [ loading, setLoading ] = useState(true)
     const [ messageApi, contextHolder ] = message.useMessage()
-    const islogin = useSelector((state: { isLogin:boolean }) => state.isLogin)
 
     const error = () => {
         messageApi.open({
@@ -45,63 +42,57 @@ const Posts = () => {
 
     return (
         <div className="posts_wrapper">
-            {
-                islogin ? (
-                    <div>
-                        <Header />
-                        {contextHolder}
-                        <div className="posts">
-                            <div className="posts_filter">
-                                <p className='posts_filter_text'>Только ваши посты</p>
-                                <Switch onChange={filterItem} />
-                            </div>
-                            <div>
-                                {
-                                    loading ? (
-                                        <div>Загрузка...</div>
-                                    ) : (
-                                        <div className='postsBox'>
-                                            <List
-                                                itemLayout="horizontal"
-                                                className='postItem'
-                                                dataSource={list.slice(0, countViewItems)}
-                                                renderItem={(item:{
-                                                    title:string,
-                                                    id:number,
-                                                    userId:number,
-                                                    body:string
-                                                }) => (
-                                                <List.Item>
-                                                    <List.Item.Meta
-                                                    title={<div>
-                                                        <p>{`${item.id}) Автор: пользователь ${item.userId}`}</p>
-                                                        <p>{item.title}</p>
-                                                    </div>}
-                                                    description={<p>{item.body}</p>}
-
-                                                    />
-                                                </List.Item>
-                                                )}
-                                            />
-                                            {
-                                                (list.length > countViewItems) ? (
-                                                    <div className="posts_button">
-                                                        <Button className='postsButton' onClick={addPosts}>Подгрузить ещё посты</Button>
-                                                    </div>
-                                                ) : (
-                                                    <div></div>
-                                                )
-                                            }
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        </div>
+            <div>
+                <Header />
+                {contextHolder}
+                <div className="posts">
+                    <div className="posts_filter">
+                        <p className='posts_filter_text'>Только ваши посты</p>
+                        <Switch onChange={filterItem} />
                     </div>
-                ) : (
-                    <Navigate to='/login' />
-                )
-            }
+                    <div>
+                        {
+                            loading ? (
+                                <div>Загрузка...</div>
+                            ) : (
+                                <div className='postsBox'>
+                                    <List
+                                        itemLayout="horizontal"
+                                        className='postItem'
+                                        dataSource={list.slice(0, countViewItems)}
+                                        renderItem={(item:{
+                                            title:string,
+                                            id:number,
+                                            userId:number,
+                                            body:string
+                                        }) => (
+                                        <List.Item>
+                                            <List.Item.Meta
+                                            title={<div>
+                                                <p>{`${item.id}) Автор: пользователь ${item.userId}`}</p>
+                                                <p>{item.title}</p>
+                                            </div>}
+                                            description={<p>{item.body}</p>}
+
+                                            />
+                                        </List.Item>
+                                        )}
+                                    />
+                                    {
+                                        (list.length > countViewItems) ? (
+                                            <div className="posts_button">
+                                                <Button className='postsButton' onClick={addPosts}>Подгрузить ещё посты</Button>
+                                            </div>
+                                        ) : (
+                                            <div></div>
+                                        )
+                                    }
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
