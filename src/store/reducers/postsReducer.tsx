@@ -9,7 +9,7 @@ export type post = {
 
 const initialState:post[] = []
 
-export const postSlice = createSlice({
+const postSlice = createSlice({
     name: 'posts',
     initialState: initialState,
     reducers: {
@@ -19,5 +19,5 @@ export const postSlice = createSlice({
     }
 })
 
-export const{ fetchPosts } = postSlice.actions
+export const { fetchPosts } = postSlice.actions
 export default postSlice.reducer

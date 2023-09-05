@@ -2,10 +2,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import loginReduser from './reducers/loginReduser';
 import postsReducer from './reducers/postsReducer';
+import todosReduser from './reducers/todosReduser';
 
 const rootReducer = combineReducers({
   isLogin:loginReduser,
-  posts:postsReducer
+  posts:postsReducer,
+  todos: todosReduser
 })
 
 const store = configureStore({

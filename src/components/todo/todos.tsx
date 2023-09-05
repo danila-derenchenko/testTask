@@ -1,33 +1,27 @@
 import './todos.css'
 import Header from "../header/header"
-import axios from 'axios'
 import { useEffect, useState } from "react"
-import { List, message } from "antd"
-import consts from "../../const"
+import { List } from "antd"
+import { todo } from '../../store/reducers/todosReduser'
+import { useSelector } from 'react-redux'
+import { requestTodos } from '../../requests'
 
 const Todos = () => {
-    const [ listTodos, setListTodos ] = useState([])
+    const [ listTodos, setListTodos ] = useState<todo[]>([])
     const [ loading, setLoading ] = useState(true)
-    const [ messageApi, contextHolder ] = message.useMessage()
 
-    const error = () => {
-        messageApi.open({
-          type: 'error',
-          content: 'Не удалось получить данные',
-        })
-    }
+    const data = useSelector((state: { todos:todo[] }) => state.todos)
+
+    requestTodos()
 
     useEffect(() => {
-        axios.get(consts.urlTodos).then((res) => {
-            setListTodos(res.data)
-        }).catch(error)
+        setListTodos(data)
         setLoading(false)
-    }, [])
+    }, [data])
 
     return (
         <div className="todos_wrapper">
             <Header />
-            {contextHolder}
             <div className="todos">
                 {
                     loading ? (
@@ -38,12 +32,7 @@ const Todos = () => {
                                 itemLayout="horizontal"
                                 className='postItem'
                                 dataSource={listTodos.filter((item: { userId:number, completed:boolean }) => (item.userId == 1 && item.completed == false))}
-                                renderItem={(item:{
-                                    title:string,
-                                    id:number,
-                                    userId:number,
-                                    completed:boolean
-                                }) => (
+                                renderItem={(item) => (
                                 <List.Item>
                                     <List.Item.Meta
                                     title={<div>
