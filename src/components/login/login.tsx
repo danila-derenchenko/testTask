@@ -51,12 +51,16 @@ const Login = () => {
     return (
         <div className="login_wrapper">
             {contextHolder}
-            <div className="login">
+            <form action='#' className="login" onSubmit={(evt) => {
+                evt.preventDefault()
+                checkPassword()
+            }} >
                 <p className="login_text">Вход в систему</p>
                 <Input status={statusInput ? ("") : ("error")} value={userNameValue} onChange={onChangeUserName} type="text" placeholder="Логин" className="login_input" />
                 <Input status={statusInput ? ("") : ("error")} value={passwordValue} onChange={onChangePassword} type="text" placeholder="Пароль" className="password_input" />
                 <Button onClick={checkPassword}>Войти</Button>
-            </div>
+                <button className='button_submit' type='submit'></button>
+            </form>
         </div>
     )
 }
