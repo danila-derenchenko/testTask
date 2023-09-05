@@ -1,32 +1,27 @@
 import './posts.css'
 import Header from "../header/header"
-import consts from '../../const'
-import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Button, List, Switch, message } from 'antd'
+import { Button, List, Switch } from 'antd'
+import { requestPosts } from '../../requests'
+import { useSelector } from 'react-redux'
+import { post } from '../../store/reducers/postsReducer'
 
 const Posts = () => {
-    const [ list, setPosts ] = useState([])
-    const [ forFilterList, setForFilter ] = useState([])
+    const [ list, setPosts ] = useState<post[]>([])
+    const [ forFilterList, setForFilter ] = useState<post[]>([])
     const [ countViewItems, setCountViewItems ] = useState(10)
     const [ loading, setLoading ] = useState(true)
-    const [ messageApi, contextHolder ] = message.useMessage()
 
-    const error = () => {
-        messageApi.open({
-          type: 'error',
-          content: 'Не удалось получить данные',
-        })
-    }
+    const data = useSelector((state: { posts:post[] }) => state.posts)
+
+    requestPosts()
 
     useEffect(() => {
         setLoading(true)
-        axios.get(consts.urlPosts).then((res) => {
-            setPosts(res.data)
-            setForFilter(res.data)
-        }).catch(error)
+        setPosts(data)
+        setForFilter(data)
         setLoading(false)
-    }, [])
+    }, [data])
 
     const filterItem = (сondition:boolean) => {
         if(сondition) {
@@ -44,7 +39,6 @@ const Posts = () => {
         <div className="posts_wrapper">
             <div>
                 <Header />
-                {contextHolder}
                 <div className="posts">
                     <div className="posts_filter">
                         <p className='posts_filter_text'>Только ваши посты</p>
@@ -60,12 +54,7 @@ const Posts = () => {
                                         itemLayout="horizontal"
                                         className='postItem'
                                         dataSource={list.slice(0, countViewItems)}
-                                        renderItem={(item:{
-                                            title:string,
-                                            id:number,
-                                            userId:number,
-                                            body:string
-                                        }) => (
+                                        renderItem={(item) => (
                                         <List.Item>
                                             <List.Item.Meta
                                             title={<div>
@@ -73,7 +62,6 @@ const Posts = () => {
                                                 <p>{item.title}</p>
                                             </div>}
                                             description={<p>{item.body}</p>}
-
                                             />
                                         </List.Item>
                                         )}

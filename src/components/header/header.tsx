@@ -1,7 +1,7 @@
 import './header.css'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
-import { actions } from '../../store/reducers'
+import { logout } from '../../store/reducers/loginReduser'
 
 const Header = () => {
     const redirectTo = useNavigate()
@@ -12,7 +12,7 @@ const Header = () => {
     }
 
     const logoutFunction = () => {
-        dispatch(actions.logout())
+        dispatch(logout())
         redirectTo('/login')
     }
 

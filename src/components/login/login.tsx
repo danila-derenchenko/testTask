@@ -2,7 +2,7 @@ import './login.css'
 import { SetStateAction, useState } from "react"
 import { Button, Input, message } from "antd"
 import { useDispatch } from 'react-redux'
-import { actions } from '../../store/reducers'
+import { login } from '../../store/reducers/loginReduser'
 
 const Login = () => {
     sessionStorage.username = 'user'
@@ -41,7 +41,7 @@ const Login = () => {
         if(userNameValue == sessionStorage.username && passwordValue == sessionStorage.password) {
             success()
             setStatusInput(true)
-            dispatch(actions.login())
+            dispatch(login())
         } else {
             error()
             setStatusInput(false)
