@@ -28,7 +28,7 @@ const Posts = () => {
         setLoading(false)
     }, [])
 
-    const filterItem = (сondition:any) => {
+    const filterItem = (сondition:boolean) => {
         if(сondition) {
             setPosts(prev => prev.filter((item: { userId:number }) => item.userId == 1))
         } else {
